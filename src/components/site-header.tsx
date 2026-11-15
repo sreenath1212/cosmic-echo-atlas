@@ -78,8 +78,37 @@ export function SiteFooter() {
             <p className="text-xs text-muted-foreground">Every photon is an echo from the past.</p>
           </div>
         </div>
+
+        {/* Project Links & PDF */}
+        <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+          <a
+            href="/Cosmic_Echo_Atlas_Project_Explanation.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-white underline underline-offset-4"
+          >
+            <span>Project Summary PDF</span>
+          </a>
+          <a
+            href="https://github.com/sreenath1212/cosmic-echo-atlas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-white underline underline-offset-4"
+          >
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://cosmic-echo-atlas-tau.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-white underline underline-offset-4"
+          >
+            <span>Live Web App</span>
+          </a>
+        </div>
+
         <p className="max-w-md font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-muted-foreground">
-          Educational visualisation · Imagery is artistic rendering · Coordinates J2000
+          NASA Space Apps 2026 · SPHEREx & Planet X Citizen Science
         </p>
       </div>
     </footer>
