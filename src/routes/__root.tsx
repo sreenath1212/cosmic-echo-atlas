@@ -137,9 +137,29 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteHeader />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="relative min-h-screen bg-[#070712] text-foreground">
+        {/* Global Atmospheric Cosmic Deep Field Background */}
+        <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+          <img
+            src="/cosmic-bg.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center opacity-35 filter contrast-125 brightness-80 scale-105"
+          />
+          {/* High-Contrast Deep Space Vignette Layer: Guarantees 100% text contrast & accessibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#070712]/80 via-[#070712]/90 to-[#04040a]/98 backdrop-blur-[0.5px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(56,189,248,0.06),transparent_60%)]" />
+        </div>
+
+        {/* Foreground Content Layer */}
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <SiteHeader />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <div className="flex-1">
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </QueryClientProvider>
   );
 }

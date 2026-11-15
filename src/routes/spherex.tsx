@@ -144,6 +144,17 @@ function SpherexPage() {
 
         {/* Hero Section */}
         <section className="mt-6 rounded-3xl border border-glass-border glass p-6 sm:p-10 relative overflow-hidden">
+          {/* High-Resolution 3D SPHEREx Spacecraft Atmospheric Visual */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-3/5 overflow-hidden">
+            <img
+              src="/spherex-observatory.jpg"
+              alt="NASA SPHEREx Space Telescope in orbit"
+              className="h-full w-full object-cover object-center lg:object-right opacity-35 lg:opacity-55 filter contrast-115 brightness-95"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#070712] via-[#070712]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#070712] via-transparent to-transparent" />
+          </div>
+
           <div className="relative z-10 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-aurora/30 bg-aurora/10 px-3 py-1 text-xs text-aurora font-mono">
               <Atom className="h-3.5 w-3.5" />

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlinkRouteImport } from './routes/blink'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as SpectrumRouteImport } from './routes/spectrum'
 import { Route as SpherexRouteImport } from './routes/spherex'
@@ -18,6 +19,11 @@ import { Route as TimelineRouteImport } from './routes/timeline'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlinkRoute = BlinkRouteImport.update({
+  id: '/blink',
+  path: '/blink',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -43,6 +49,7 @@ const TimelineRoute = TimelineRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blink': typeof BlinkRoute
   '/explore': typeof ExploreRoute
   '/spectrum': typeof SpectrumRoute
   '/spherex': typeof SpherexRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blink': typeof BlinkRoute
   '/explore': typeof ExploreRoute
   '/spectrum': typeof SpectrumRoute
   '/spherex': typeof SpherexRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blink': typeof BlinkRoute
   '/explore': typeof ExploreRoute
   '/spectrum': typeof SpectrumRoute
   '/spherex': typeof SpherexRoute
@@ -65,14 +74,23 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/spectrum' | '/spherex' | '/timeline'
+  fullPaths:
+    '/' | '/blink' | '/explore' | '/spectrum' | '/spherex' | '/timeline'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/spectrum' | '/spherex' | '/timeline'
-  id: '__root__' | '/' | '/explore' | '/spectrum' | '/spherex' | '/timeline'
+  to: '/' | '/blink' | '/explore' | '/spectrum' | '/spherex' | '/timeline'
+  id:
+    | '__root__'
+    | '/'
+    | '/blink'
+    | '/explore'
+    | '/spectrum'
+    | '/spherex'
+    | '/timeline'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlinkRoute: typeof BlinkRoute
   ExploreRoute: typeof ExploreRoute
   SpectrumRoute: typeof SpectrumRoute
   SpherexRoute: typeof SpherexRoute
@@ -86,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blink': {
+      id: '/blink'
+      path: '/blink'
+      fullPath: '/blink'
+      preLoaderRoute: typeof BlinkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -121,6 +146,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlinkRoute: BlinkRoute,
   ExploreRoute: ExploreRoute,
   SpectrumRoute: SpectrumRoute,
   SpherexRoute: SpherexRoute,

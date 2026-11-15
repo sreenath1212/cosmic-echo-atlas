@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Orbit, Clock3, Waves, Sparkles } from "lucide-react";
+import { ArrowRight, Orbit, Clock3, Waves, Sparkles, Radio } from "lucide-react";
 
 import heroImg from "@/assets/hero-nebula.jpg";
 import pillarsIr from "@/assets/pillars-infrared.jpg";
 import galaxyImg from "@/assets/spiral-galaxy.jpg";
+import spherexImg from "@/assets/spherex-observatory.jpg";
+import planetXImg from "@/assets/planet-x.jpg";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/site-header";
 
@@ -60,7 +62,15 @@ const MODULES = [
     tag: "Module 04",
     title: "SPHEREx Mission Portal",
     body: "NASA all-sky spectral survey. DR1 products, SPLICES 9M ice catalog, 102-channel spectrophotometry and AWS cloud data.",
-    img: heroImg,
+    img: spherexImg,
+  },
+  {
+    to: "/blink",
+    icon: Radio,
+    tag: "Module 05",
+    title: "Planet X Hunter",
+    body: "Blink comparator for multi-epoch SPHEREx infrared scans. Spot asteroids, comets, and trans-Neptunian bodies moving across the sky.",
+    img: planetXImg,
   },
 ] as const;
 
@@ -121,6 +131,12 @@ function Index() {
             style={{ animationDelay: "400ms" }}
           >
             <Button asChild variant="hero" size="xl">
+              <Link to="/blink">
+                <Radio className="h-4 w-4 text-black" />
+                Planet X Hunter
+              </Link>
+            </Button>
+            <Button asChild variant="glass" size="xl">
               <Link to="/explore">
                 Launch Sky Map <ArrowRight />
               </Link>
@@ -171,16 +187,16 @@ function Index() {
           <div>
             <p className="eyebrow">Instruments</p>
             <h2 className="mt-4 max-w-xl text-3xl font-light sm:text-4xl">
-              Four ways to read the <span className="text-aurora">light of the cosmos</span>
+              Five ways to explore the cosmos and <span className="text-aurora">hunt for hidden worlds</span>
             </h2>
           </div>
           <p className="max-w-sm text-sm text-muted-foreground">
-            Each module is a hands-on instrument. Drag, scrub and switch wavelengths to discover
-            what the naked eye cannot see.
+            Each module is a hands-on instrument. Drag, scrub, blink multi-epoch scans and switch
+            wavelengths to discover what the naked eye cannot see.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {MODULES.map((m) => (
             <Link
               key={m.to}

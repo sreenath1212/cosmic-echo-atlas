@@ -6,6 +6,7 @@ const NAV = [
   { to: "/timeline", label: "Cosmic Timeline" },
   { to: "/spectrum", label: "Spectrum Lab" },
   { to: "/spherex", label: "SPHEREx Mission" },
+  { to: "/blink", label: "Planet X Hunter" },
 ] as const;
 
 export function Logo() {

@@ -747,7 +747,7 @@ export interface SpectrumPoint {
   flux: number; // mJy
   error: number; // mJy
   continuum: number; // mJy
-  absorptionFeature?: string;
+  absorptionFeature?: string | undefined;
 }
 
 export function generateSyntheticSpherexSpectrum(
