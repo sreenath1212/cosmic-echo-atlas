@@ -143,97 +143,90 @@ function BlinkPage() {
 
   return (
     <main className="relative min-h-[100svh] pt-24 pb-16">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-radial-vignette opacity-70" />
-      <div className="pointer-events-none fixed top-24 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-aurora/10 blur-[140px]" />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Challenge & Mission Header */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-zinc-400">
             <span>NASA Space Apps 2026 Challenge</span>
             <span>/</span>
-            <span className="text-aurora font-semibold">Planet X and SPHEREx</span>
+            <span className="text-zinc-200 font-semibold">Planet X and SPHEREx</span>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-aurora/30 bg-aurora/10 px-3 py-1 font-mono text-[11px] text-aurora">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-aurora opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-aurora" />
-            </span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-zinc-300">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
             <span>LIVE IRSA MOST & SPHEREx DR1 LEVEL 2 ENGINE</span>
           </div>
         </div>
 
         {/* Hero Section */}
-        <div className="rounded-3xl border border-glass-border glass p-6 sm:p-10 relative overflow-hidden">
-          {/* Stunning High-Resolution Planet X Visual in Background */}
+        <div className="rounded-3xl border border-white/10 bg-zinc-900/40 backdrop-blur-md p-6 sm:p-10 relative overflow-hidden">
+          {/* High-Resolution Planet X Visual in Background */}
           <div className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-3/5 overflow-hidden">
             <img
               src="/planet-x.jpg"
               alt="Cinematic visualization of Planet X in the outer solar system"
-              className="h-full w-full object-cover object-center lg:object-right opacity-35 lg:opacity-55 filter contrast-125 brightness-95"
+              className="h-full w-full object-cover object-center lg:object-right opacity-30 lg:opacity-45 filter contrast-110 brightness-90"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#070712] via-[#070712]/80 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#070712] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-zinc-300">
+              <Sparkles className="h-3.5 w-3.5 text-zinc-400" />
               <span>Citizen Science Discovery Game</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl font-light tracking-tight leading-tight">
-              Spot the Difference: <span className="text-aurora font-semibold">Hunt Planet X</span>
+            <h1 className="font-display text-3xl sm:text-5xl font-light tracking-tight leading-tight text-white">
+              Spot the Difference: <span className="font-semibold text-zinc-100">Hunt Planet X</span>
             </h1>
-            <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+            <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
               In 1930, 24-year-old Clyde Tombaugh discovered Pluto by rapidly flipping between two
               photographs of the night sky taken days apart. When two images flash back and forth,{" "}
-              <strong className="text-foreground">stars trillions of miles away stay frozen</strong>,
-              while <strong className="text-aurora">asteroids and planets hop across space</strong>!
+              <strong className="text-white">stars trillions of miles away stay frozen</strong>,
+              while <strong className="text-sky-300">asteroids and planets hop across space</strong>!
               Now it’s your turn to spot the moving space rocks across NASA's SPHEREx infrared sky scans.
             </p>
           </div>
         </div>
 
         {/* 30-Second Space Detective Quick Guide */}
-        <div className="rounded-3xl border border-aurora/30 bg-aurora/5 p-6 sm:p-8">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-aurora font-bold mb-4">
-            <Zap className="h-4 w-4" />
+        <div className="rounded-3xl border border-white/10 bg-zinc-900/30 p-6 sm:p-8 backdrop-blur-md">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-zinc-300 font-semibold mb-4">
+            <Zap className="h-4 w-4 text-amber-400" />
             <span>30-Second Quick Start Guide: How to Spot a Space Rock</span>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-glass-border glass p-4 space-y-2">
+            <div className="rounded-2xl border border-white/5 bg-black/40 p-4 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20 font-mono text-xs font-bold text-primary">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 font-mono text-xs font-semibold text-white">
                   1
                 </span>
-                <span className="font-semibold text-sm">Pick a Target Below</span>
+                <span className="font-semibold text-sm text-zinc-100">Pick a Target Below</span>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-xs text-zinc-400 leading-relaxed">
                 Start with <strong>Asteroid Victoria</strong> (easiest to spot!). Or try dwarf planet Ceres or the 15-year Planet X time machine.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-glass-border glass p-4 space-y-2">
+            <div className="rounded-2xl border border-white/5 bg-black/40 p-4 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-aurora/20 font-mono text-xs font-bold text-aurora">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 font-mono text-xs font-semibold text-white">
                   2
                 </span>
-                <span className="font-semibold text-sm">Watch the Blink Flipbook</span>
+                <span className="font-semibold text-sm text-zinc-100">Watch the Blink Flipbook</span>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-xs text-zinc-400 leading-relaxed">
                 The viewer will alternate between Photo 1 and Photo 2 every 0.5 seconds. You can also drag the split slider manually!
               </p>
             </div>
 
-            <div className="rounded-2xl border border-glass-border glass p-4 space-y-2">
+            <div className="rounded-2xl border border-white/5 bg-black/40 p-4 space-y-2">
               <div className="flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/20 font-mono text-xs font-bold text-green-400">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 font-mono text-xs font-semibold text-white">
                   3
                 </span>
-                <span className="font-semibold text-sm">Spot What Jumps & Flag It!</span>
+                <span className="font-semibold text-sm text-zinc-100">Spot What Jumps & Flag It!</span>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-xs text-zinc-400 leading-relaxed">
                 Notice the dot hopping back and forth? Click <strong>"⭐ I Found It!"</strong> to log your verified citizen science discovery!
               </p>
             </div>
@@ -241,12 +234,12 @@ function BlinkPage() {
         </div>
 
         {/* Target Selector Tabs */}
-        <div className="rounded-3xl border border-glass-border glass p-6">
-          <div className="flex items-center gap-2 border-b border-glass-border/60 pb-3">
+        <div className="rounded-3xl border border-white/10 bg-zinc-900/40 p-6 backdrop-blur-md">
+          <div className="flex items-center gap-2 border-b border-white/10 pb-3">
             {[
-              { id: "presets", label: "🌟 Ready-to-Spot Targets", icon: Sparkles },
-              { id: "custom_name", label: "🔍 Search by Asteroid Name", icon: Search },
-              { id: "orbit_sim", label: "🪐 Planet X Orbit Simulator", icon: Orbit },
+              { id: "presets", label: "Ready-to-Spot Targets", icon: Sparkles },
+              { id: "custom_name", label: "Search by Asteroid Name", icon: Search },
+              { id: "orbit_sim", label: "Planet X Orbit Simulator", icon: Orbit },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -255,8 +248,8 @@ function BlinkPage() {
                 className={cn(
                   "inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs transition-all",
                   activeTab === tab.id
-                    ? "bg-primary text-black font-semibold shadow-sm"
-                    : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                    ? "bg-white text-zinc-950 font-semibold shadow-sm"
+                    : "text-zinc-400 hover:bg-white/5 hover:text-white"
                 )}
               >
                 <tab.icon className="h-3.5 w-3.5" />
@@ -280,8 +273,8 @@ function BlinkPage() {
                     className={cn(
                       "flex flex-col justify-between rounded-2xl border p-4 text-left transition-all",
                       selectedPreset.id === preset.id
-                        ? "border-aurora bg-aurora/10 shadow-lg ring-1 ring-aurora"
-                        : "border-glass-border bg-background/40 hover:bg-background/60"
+                        ? "border-white/40 bg-white/10 shadow-md ring-1 ring-white/20"
+                        : "border-white/10 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-white/20"
                     )}
                   >
                     <div>
@@ -293,24 +286,24 @@ function BlinkPage() {
                             className="h-full w-full object-cover"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                          <span className="absolute bottom-1.5 left-2 text-[10px] font-mono text-cyan-300 font-medium">
+                          <span className="absolute bottom-1.5 left-2 text-[10px] font-mono text-zinc-300 font-medium">
                             Outer Kuiper Belt Visualization
                           </span>
                         </div>
                       )}
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-sm text-foreground">{preset.name}</span>
-                        <span className="rounded-full bg-white/10 px-2 py-0.5 font-mono text-[9px] uppercase text-aurora font-bold">
+                        <span className="font-semibold text-sm text-white">{preset.name}</span>
+                        <span className="rounded-full bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase text-zinc-300 font-medium">
                           {preset.difficulty || preset.type}
                         </span>
                       </div>
-                      <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
+                      <p className="mt-2 text-xs text-zinc-400 line-clamp-2">
                         {preset.story || preset.description}
                       </p>
                     </div>
                     <div className="mt-4 pt-2 border-t border-white/5 flex items-center justify-between font-mono text-[10px]">
-                      <span className="text-muted-foreground">Dist: {preset.distanceInMiles || "Solar System"}</span>
-                      <span className="text-aurora font-semibold">{preset.motionRate}</span>
+                      <span className="text-zinc-400">Dist: {preset.distanceInMiles || "Solar System"}</span>
+                      <span className="text-zinc-200 font-medium">{preset.motionRate}</span>
                     </div>
                   </button>
                 ))}
@@ -518,24 +511,24 @@ function BlinkPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-glass-border glass p-5 space-y-2">
-            <p className="font-mono text-xs font-semibold text-aurora uppercase">
+          <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-5 space-y-2 backdrop-blur-sm">
+            <p className="font-mono text-xs font-semibold text-zinc-300 uppercase">
               2. SPHEREx 102-Band Infrared
             </p>
-            <h3 className="text-base font-semibold">Seeing Through Cosmic Dust</h3>
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <h3 className="text-base font-semibold text-white">Seeing Through Cosmic Dust</h3>
+            <p className="text-xs leading-relaxed text-zinc-400">
               NASA's SPHEREx telescope maps the entire sky in near-infrared (0.75 to 5.0 µm). Cold, dark
               outer solar system worlds don't shine in visible light, but glow in infrared heat, making
               SPHEREx ideal for spotting hidden worlds!
             </p>
           </div>
 
-          <div className="rounded-2xl border border-glass-border glass p-5 space-y-2">
-            <p className="font-mono text-xs font-semibold text-primary uppercase">
+          <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-5 space-y-2 backdrop-blur-sm">
+            <p className="font-mono text-xs font-semibold text-zinc-300 uppercase">
               3. 15-Year Time Machine
             </p>
-            <h3 className="text-base font-semibold">WISE (2010) vs SPHEREx (2025)</h3>
-            <p className="text-xs leading-relaxed text-muted-foreground">
+            <h3 className="text-base font-semibold text-white">WISE (2010) vs SPHEREx (2025)</h3>
+            <p className="text-xs leading-relaxed text-zinc-400">
               A hypothetical Planet X takes over 10,000 years to orbit the Sun, shifting slowly each year.
               By comparing 2010 NASA WISE surveys to 2025 SPHEREx scans, its 15-year positional shift
               becomes visibly detectable to human eyes!

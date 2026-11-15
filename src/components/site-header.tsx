@@ -12,11 +12,11 @@ const NAV = [
 export function Logo() {
   return (
     <span className="relative grid h-8 w-8 place-items-center">
-      <span className="absolute inset-0 rounded-full border border-primary/40" />
+      <span className="absolute inset-0 rounded-full border border-white/20" />
       <span className="absolute inset-0 animate-orbit">
-        <span className="absolute -top-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary glow-cyan" />
+        <span className="absolute -top-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-sky-400" />
       </span>
-      <span className="h-3 w-3 rounded-full bg-aurora glow-violet" />
+      <span className="h-2.5 w-2.5 rounded-full bg-white shadow-sm" />
     </span>
   );
 }
@@ -24,11 +24,11 @@ export function Logo() {
 export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full glass px-4 py-2.5">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border border-white/10 bg-zinc-950/70 backdrop-blur-md px-4 py-2.5 shadow-sm">
         <Link to="/" className="flex items-center gap-3">
           <Logo />
-          <span className="font-display text-sm font-semibold tracking-[0.22em]">
-            COSMIC<span className="text-aurora"> ECHO</span>
+          <span className="font-display text-sm font-semibold tracking-[0.22em] text-white">
+            COSMIC<span className="text-zinc-400 font-normal"> ECHO</span>
           </span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
@@ -37,27 +37,24 @@ export function SiteHeader() {
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              className="rounded-full px-4 py-2 text-[13px] text-muted-foreground transition-all duration-300 hover:text-foreground data-[status=active]:bg-primary/12 data-[status=active]:text-primary"
+              className="rounded-full px-4 py-2 text-[13px] text-zinc-400 transition-all duration-200 hover:text-white data-[status=active]:bg-white/10 data-[status=active]:text-white"
             >
               {n.label}
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground lg:flex">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-          </span>
-          Deep field link
+        <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400 lg:flex">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          Deep field active
         </div>
       </div>
-      <nav className="mx-auto mt-2 flex max-w-7xl gap-1 overflow-x-auto rounded-full glass p-1 md:hidden">
+      <nav className="mx-auto mt-2 flex max-w-7xl gap-1 overflow-x-auto rounded-full border border-white/10 bg-zinc-950/70 backdrop-blur-md p-1 md:hidden">
         {NAV.map((n) => (
           <Link
             key={n.to}
             to={n.to}
             activeOptions={{ exact: n.to === "/" }}
-            className="shrink-0 rounded-full px-3 py-1.5 text-xs text-muted-foreground data-[status=active]:bg-primary/12 data-[status=active]:text-primary"
+            className="shrink-0 rounded-full px-3 py-1.5 text-xs text-zinc-400 data-[status=active]:bg-white/10 data-[status=active]:text-white"
           >
             {n.label}
           </Link>
