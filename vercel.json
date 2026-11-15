@@ -3,10 +3,6 @@
   "outputDirectory": ".vercel/output",
   "installCommand": "bun install",
   "framework": null,
-  "regions": ["iad1"],
-  "functions": {
-    ".vercel/output/functions/**/*.js": {
-      "runtime": "nodejs22.x"
-    }
-  }
+  "regions": ["iad1"]
 }
+
