@@ -106,17 +106,18 @@ function Index() {
         />
         <div className="absolute inset-0 bg-hero-fade" />
         <div className="absolute inset-0 bg-bottom-fade" />
-        <div className="pointer-events-none absolute inset-0 hud-grid opacity-30" />
+        <div className="pointer-events-none absolute inset-0 hud-grid opacity-50" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 animate-scan bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-28">
           <p className="eyebrow animate-rise">Deep Space Visualisation Platform</p>
           <h1
-            className="mt-6 max-w-4xl font-display text-5xl font-light leading-[0.95] sm:text-7xl lg:text-8xl animate-rise text-white"
+            className="mt-6 max-w-4xl font-display text-5xl font-light leading-[0.95] sm:text-7xl lg:text-8xl animate-rise"
             style={{ animationDelay: "120ms" }}
           >
             COSMIC
             <br />
-            <span className="font-semibold text-zinc-100 tracking-tight">ECHO</span>
+            <span className="font-semibold text-aurora text-glow">ECHO</span>
           </h1>
           <p
             className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg animate-rise"

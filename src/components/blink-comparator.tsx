@@ -6,8 +6,10 @@ import {
   Crosshair,
   Sliders,
   CheckCircle2,
+  Share2,
   Clock,
   Radio,
+  Flame,
   ArrowRight,
   Eye,
   EyeOff,
@@ -15,6 +17,7 @@ import {
   Trophy,
   Copy,
   Info,
+  HelpCircle,
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,17 +47,17 @@ export function BlinkComparator({
   epochB,
   targetName = "Target",
   motionRate,
-  difficulty = "Standard Target",
+  difficulty = "Beginner 🟢",
   story,
   whatToLookFor,
   distanceInMiles,
 }: BlinkComparatorProps) {
-  const [mode, setMode] = useState<"slider" | "blink">("blink");
+  const [mode, setMode] = useState<"slider" | "blink">("blink"); // Default to blink mode for instant motion recognition
   const [sliderPos, setSliderPos] = useState(50);
   const [isBlinking, setIsBlinking] = useState(true);
   const [currentBlinkEpoch, setCurrentBlinkEpoch] = useState<"A" | "B">("A");
-  const [blinkSpeedMs, setBlinkSpeedMs] = useState(500);
-  const [detectiveVision, setDetectiveVision] = useState(true);
+  const [blinkSpeedMs, setBlinkSpeedMs] = useState(500); // 0.5s flip
+  const [detectiveVision, setDetectiveVision] = useState(true); // Default ON to help normal users immediately see what moved
   const [certModalOpen, setCertModalOpen] = useState(false);
   const [copiedReport, setCopiedReport] = useState(false);
 
@@ -118,39 +121,39 @@ export function BlinkComparator({
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Target Mission Brief Card */}
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/50 p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 backdrop-blur-md">
+      {/* Friendly Guide Callout Header */}
+      <div className="rounded-2xl border border-aurora/30 bg-aurora/10 p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-md bg-white/10 border border-white/10 px-2 py-0.5 font-mono text-xs font-medium text-zinc-200">
-              <Zap className="h-3 w-3 text-amber-400" />
-              <span>Target Analysis</span>
+            <span className="inline-flex items-center gap-1 rounded-md bg-aurora/20 px-2 py-0.5 font-mono text-xs font-semibold text-aurora">
+              <Zap className="h-3 w-3" />
+              <span>Detective Objective</span>
             </span>
-            <span className="text-xs font-mono text-zinc-400">{difficulty}</span>
+            <span className="text-xs font-mono text-muted-foreground">{difficulty}</span>
           </div>
-          <p className="text-sm font-medium text-zinc-100">
+          <p className="text-sm font-medium text-foreground">
             {whatToLookFor ||
-              "Look inside the target area: background stars stay fixed, while the orbiting body changes position."}
+              "Look inside the target circle: the stars remain motionless, but the space rock visibly hops position!"}
           </p>
-          {story && <p className="text-xs text-zinc-400">{story}</p>}
+          {story && <p className="text-xs text-muted-foreground">{story}</p>}
         </div>
 
-        {/* Flag Candidate Action */}
+        {/* Big Action: Flag Candidate */}
         <Button
           variant="hero"
           size="default"
           onClick={() => setCertModalOpen(true)}
-          className="w-full md:w-auto shrink-0 gap-2"
+          className="w-full md:w-auto shrink-0 gap-2 shadow-lg hover:scale-105 transition-transform"
         >
-          <Trophy className="h-4 w-4 text-amber-600" />
-          <span>I Found It · Flag Candidate</span>
+          <Trophy className="h-4 w-4 text-amber-300" />
+          <span className="font-semibold">⭐ I Found It! Flag Candidate</span>
         </Button>
       </div>
 
       {/* Main Controls Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-zinc-900/60 p-3 sm:px-4 backdrop-blur-md">
-        {/* Mode Selector - Clean Segmented Control */}
-        <div className="flex items-center gap-1 rounded-xl bg-black/50 p-1 border border-white/5">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-glass-border glass p-3 sm:px-4">
+        {/* Mode Selector */}
+        <div className="flex items-center gap-1 rounded-xl bg-background/60 p-1 border border-white/5">
           <button
             type="button"
             onClick={() => {
@@ -160,12 +163,12 @@ export function BlinkComparator({
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs transition-all",
               mode === "blink"
-                ? "bg-white text-zinc-950 font-semibold shadow-sm"
-                : "text-zinc-400 hover:text-white"
+                ? "bg-aurora text-black font-semibold shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Radio className="h-3.5 w-3.5" />
-            <span>Auto-Blink</span>
+            <span>Auto-Blink (Recommended)</span>
           </button>
           <button
             type="button"
@@ -176,8 +179,8 @@ export function BlinkComparator({
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-mono text-xs transition-all",
               mode === "slider"
-                ? "bg-white text-zinc-950 font-semibold shadow-sm"
-                : "text-zinc-400 hover:text-white"
+                ? "bg-primary text-black font-semibold shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Sliders className="h-3.5 w-3.5" />
@@ -185,48 +188,48 @@ export function BlinkComparator({
           </button>
         </div>
 
-        {/* Detective Vision Toggle - Understated Precision State */}
+        {/* Detective Vision Toggle (Highlights what moved) */}
         <button
           type="button"
           onClick={() => setDetectiveVision(!detectiveVision)}
           className={cn(
             "flex items-center gap-2 rounded-xl px-3 py-1.5 font-mono text-xs border transition-all",
             detectiveVision
-              ? "border-sky-500/40 bg-sky-950/40 text-sky-200 shadow-sm"
-              : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
+              ? "border-green-500/60 bg-green-500/20 text-green-300 shadow-sm"
+              : "border-white/10 bg-white/5 text-muted-foreground hover:text-white"
           )}
         >
           {detectiveVision ? (
             <>
-              <Eye className="h-4 w-4 text-sky-400" />
-              <span>Motion Markers: ON</span>
+              <Eye className="h-4 w-4 text-green-400" />
+              <span>💡 Detective Vision: ON</span>
             </>
           ) : (
             <>
-              <EyeOff className="h-4 w-4 text-zinc-500" />
-              <span>Motion Markers: OFF</span>
+              <EyeOff className="h-4 w-4 text-muted-foreground" />
+              <span>Detective Vision: OFF</span>
             </>
           )}
         </button>
 
-        {/* Blink Speed Controls (Blink Mode Only) */}
+        {/* Blink Speed & Pause (Blink Mode Only) */}
         {mode === "blink" && (
           <div className="flex items-center gap-2">
             <Button
-              variant="outline"
+              variant="glass"
               size="sm"
               onClick={() => setIsBlinking(!isBlinking)}
-              className="gap-1.5 h-8 font-mono text-xs border-white/10 bg-white/5 text-zinc-200 hover:bg-white/10"
+              className="gap-1.5 h-8 font-mono text-xs"
             >
-              {isBlinking ? <Pause className="h-3.5 w-3.5 text-zinc-400" /> : <Play className="h-3.5 w-3.5 text-zinc-200" />}
-              <span>{isBlinking ? "Pause" : "Play"}</span>
+              {isBlinking ? <Pause className="h-3.5 w-3.5 text-amber-400" /> : <Play className="h-3.5 w-3.5 text-green-400" />}
+              <span>{isBlinking ? "Pause Blink" : "Play Blink"}</span>
             </Button>
-            <div className="flex items-center gap-1 font-mono text-[11px] text-zinc-400 bg-black/40 px-2 py-1 rounded-lg border border-white/5">
-              <span>Interval:</span>
+            <div className="flex items-center gap-1 font-mono text-[11px] text-muted-foreground bg-background/50 px-2 py-1 rounded-lg">
+              <span>Speed:</span>
               {[
-                { label: "0.5s", ms: 500 },
-                { label: "0.3s", ms: 300 },
-                { label: "0.8s", ms: 800 },
+                { label: "Normal (0.5s)", ms: 500 },
+                { label: "Fast (0.3s)", ms: 300 },
+                { label: "Slow (0.8s)", ms: 800 },
               ].map((s) => (
                 <button
                   key={s.label}
@@ -234,10 +237,10 @@ export function BlinkComparator({
                   onClick={() => setBlinkSpeedMs(s.ms)}
                   className={cn(
                     "px-1.5 py-0.5 rounded transition-colors",
-                    blinkSpeedMs === s.ms ? "bg-white/20 text-white font-medium" : "hover:text-white"
+                    blinkSpeedMs === s.ms ? "bg-white/20 text-white font-bold" : "hover:text-white"
                   )}
                 >
-                  {s.label}
+                  {s.label.split(" ")[0]}
                 </button>
               ))}
             </div>
@@ -252,7 +255,7 @@ export function BlinkComparator({
         onPointerMove={mode === "slider" ? handlePointerMove : undefined}
         onPointerUp={mode === "slider" ? handlePointerUp : undefined}
         className={cn(
-          "relative aspect-[16/10] w-full select-none overflow-hidden rounded-3xl border border-white/10 bg-black shadow-xl",
+          "relative aspect-[16/10] w-full select-none overflow-hidden rounded-3xl border border-glass-border bg-black shadow-2xl",
           mode === "slider" ? "cursor-ew-resize" : "cursor-default"
         )}
       >
@@ -280,17 +283,17 @@ export function BlinkComparator({
 
             {/* Drag Handle Divider */}
             <div
-              className="absolute inset-y-0 w-0.5 bg-white/70 shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+              className="absolute inset-y-0 w-0.5 bg-aurora glow-cyan"
               style={{ left: `${sliderPos}%` }}
             >
-              <div className="absolute left-1/2 top-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-zinc-950 border border-white/30 font-mono text-[11px] text-white shadow-lg">
+              <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full glass-strong border border-aurora font-mono text-xs text-aurora shadow-xl">
                 ⟷
               </div>
             </div>
 
             {/* Slider Guidance Overlay */}
-            <div className="pointer-events-none absolute bottom-12 left-1/2 -translate-x-1/2 rounded-full bg-black/80 px-4 py-1.5 font-mono text-xs text-zinc-400 backdrop-blur-md border border-white/10">
-              Drag line horizontally to inspect positional shift
+            <div className="pointer-events-none absolute bottom-12 left-1/2 -translate-x-1/2 rounded-full bg-black/75 px-4 py-1.5 font-mono text-xs text-muted-foreground backdrop-blur-md border border-white/10">
+              Drag line left & right to compare Photo 1 vs Photo 2
             </div>
           </>
         )}
@@ -304,186 +307,186 @@ export function BlinkComparator({
               className="h-full w-full object-cover filter contrast-125 transition-none"
             />
 
-            {/* Observatory Photo Status Indicator */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-black/80 backdrop-blur-md px-4 py-1.5 font-mono text-xs font-medium text-white border border-white/15 shadow-xl">
+            {/* High-Visibility Current Photo Indicator */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full glass-strong px-5 py-2 font-mono text-xs font-semibold shadow-2xl border border-white/20">
               <span
                 className={cn(
-                  "h-2 w-2 rounded-full",
-                  currentBlinkEpoch === "A" ? "bg-sky-400" : "bg-amber-400"
+                  "h-2.5 w-2.5 rounded-full animate-ping",
+                  currentBlinkEpoch === "A" ? "bg-cyan-400" : "bg-amber-400"
                 )}
               />
-              <span>
-                {currentBlinkEpoch === "A" ? "PHOTO 1: " : "PHOTO 2: "}
+              <span className={currentBlinkEpoch === "A" ? "text-cyan-300 font-bold" : "text-amber-300 font-bold"}>
+                {currentBlinkEpoch === "A" ? "📸 PHOTO 1: " : "📸 PHOTO 2: "}
                 {formatDateOnly(currentBlinkEpoch === "A" ? epochA.obsDate : epochB.obsDate)}
               </span>
             </div>
           </div>
         )}
 
-        {/* 3. PRECISION MOTION MARKERS OVERLAY */}
+        {/* 3. DETECTIVE VISION / MOTION HIGHLIGHT OVERLAY */}
         {detectiveVision && (
           <div className="pointer-events-none absolute inset-0">
             {/* Position in Photo 1 (Epoch A Marker) */}
             <div
               className={cn(
-                "absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200",
-                mode === "blink" && currentBlinkEpoch === "B" ? "opacity-35" : "opacity-100"
+                "absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300",
+                mode === "blink" && currentBlinkEpoch === "B" ? "opacity-30" : "opacity-100"
               )}
               style={{ left: "48%", top: "52%" }}
             >
-              <div className="h-12 w-12 rounded-full border border-sky-400/80 flex items-center justify-center">
-                <div className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+              <div className="h-16 w-16 rounded-full border-2 border-cyan-400/90 animate-pulse flex items-center justify-center">
+                <div className="h-2 w-2 rounded-full bg-cyan-400" />
               </div>
-              <span className="absolute -top-6 left-1/2 -translate-x-1/2 rounded bg-black/90 px-2 py-0.5 font-mono text-[10px] text-sky-300 whitespace-nowrap border border-sky-500/30">
-                Position 1
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 rounded bg-black/90 px-2 py-0.5 font-mono text-[10px] text-cyan-300 whitespace-nowrap border border-cyan-400/50">
+                Photo 1 Position
               </span>
             </div>
 
-            {/* Trajectory Vector */}
+            {/* Trajectory Arrow */}
             <div
               className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2"
               style={{ left: "51%", top: "49%" }}
             >
-              <div className="flex items-center gap-1 font-mono text-[10px] text-zinc-300 bg-black/85 px-2 py-0.5 rounded border border-white/15">
-                <span>Δθ ~{totalOffsetDeg.toFixed(3)}°</span>
-                <ArrowRight className="h-3 w-3 text-zinc-400" />
+              <div className="flex items-center gap-1 font-mono text-[10px] text-green-300 bg-black/80 px-2 py-0.5 rounded-full border border-green-500/40">
+                <span>Shifted ~{totalOffsetDeg.toFixed(3)}°</span>
+                <ArrowRight className="h-3 w-3 text-green-400" />
               </div>
             </div>
 
             {/* Position in Photo 2 (Epoch B Marker) */}
             <div
               className={cn(
-                "absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200",
-                mode === "blink" && currentBlinkEpoch === "A" ? "opacity-35" : "opacity-100"
+                "absolute -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300",
+                mode === "blink" && currentBlinkEpoch === "A" ? "opacity-30" : "opacity-100"
               )}
               style={{ left: "54%", top: "46%" }}
             >
-              <div className="h-12 w-12 rounded-full border border-amber-400/80 flex items-center justify-center">
-                <div className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+              <div className="h-16 w-16 rounded-full border-2 border-amber-400/90 animate-pulse flex items-center justify-center">
+                <div className="h-2 w-2 rounded-full bg-amber-400" />
               </div>
-              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded bg-black/90 px-2 py-0.5 font-mono text-[10px] text-amber-300 whitespace-nowrap border border-amber-500/30">
-                Position 2
+              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded bg-black/90 px-2 py-0.5 font-mono text-[10px] text-amber-300 whitespace-nowrap border border-amber-400/50">
+                Photo 2 Position
               </span>
             </div>
           </div>
         )}
 
-        {/* Standard Clean Telescope Reticle */}
+        {/* Reticle / Crosshair Center */}
         {!detectiveVision && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="relative flex items-center justify-center">
-              <div className="h-12 w-12 rounded-full border border-white/20" />
-              <Crosshair className="absolute h-6 w-6 text-zinc-400 opacity-60" />
-              <div className="absolute -top-7 rounded bg-black/80 px-2 py-0.5 font-mono text-[10px] text-zinc-300 whitespace-nowrap border border-white/15">
-                Target Zone: {targetName}
+              <div className="h-14 w-14 rounded-full border border-dashed border-primary/80 animate-spin [animation-duration:16s]" />
+              <Crosshair className="absolute h-8 w-8 text-aurora opacity-75" />
+              <div className="absolute -top-7 rounded bg-black/80 px-2 py-0.5 font-mono text-[10px] text-primary whitespace-nowrap border border-primary/30">
+                Search Zone: {targetName}
               </div>
             </div>
           </div>
         )}
 
         {/* Top Badges (Photo 1 & Photo 2 Info) */}
-        <div className="pointer-events-none absolute left-4 top-4 rounded-xl bg-black/70 border border-white/10 px-3 py-1.5 font-mono text-xs backdrop-blur-sm">
-          <span className="text-sky-300 font-medium">PHOTO 1:</span>{" "}
-          <span className="text-zinc-200">{formatDateOnly(epochA.obsDate)}</span>
+        <div className="pointer-events-none absolute left-4 top-4 rounded-xl glass px-3 py-1.5 font-mono text-xs">
+          <span className="text-cyan-400 font-bold">PHOTO 1:</span>{" "}
+          <span className="text-white/90">{formatDateOnly(epochA.obsDate)}</span>
         </div>
 
-        <div className="pointer-events-none absolute right-4 top-4 rounded-xl bg-black/70 border border-white/10 px-3 py-1.5 font-mono text-xs text-right backdrop-blur-sm">
-          <span className="text-amber-300 font-medium">PHOTO 2:</span>{" "}
-          <span className="text-zinc-200">{formatDateOnly(epochB.obsDate)}</span>
+        <div className="pointer-events-none absolute right-4 top-4 rounded-xl glass px-3 py-1.5 font-mono text-xs text-right">
+          <span className="text-amber-400 font-bold">PHOTO 2:</span>{" "}
+          <span className="text-white/90">{formatDateOnly(epochB.obsDate)}</span>
         </div>
 
-        {/* Bottom Status Readout */}
-        <div className="pointer-events-none absolute bottom-4 inset-x-4 flex items-center justify-between text-xs font-mono text-zinc-400">
+        {/* Bottom Quick Readout */}
+        <div className="pointer-events-none absolute bottom-4 inset-x-4 flex items-center justify-between text-xs font-mono text-muted-foreground">
           <div className="rounded-lg bg-black/80 px-2.5 py-1 backdrop-blur-sm border border-white/10">
-            Distance: {distanceInMiles || `${epochA.distAu} AU`}
+            Distance: {distanceInMiles || `${epochA.distAu} AU (~${Math.round(epochA.distAu * 92.96)}M miles)`}
           </div>
           {motionRate && (
-            <div className="rounded-lg bg-black/80 px-2.5 py-1 backdrop-blur-sm text-zinc-200 border border-white/15">
+            <div className="rounded-lg bg-black/80 px-2.5 py-1 backdrop-blur-sm text-aurora border border-aurora/30">
               Motion: {motionRate}
             </div>
           )}
-          <div className="rounded-lg bg-black/80 px-2.5 py-1 backdrop-blur-sm border border-white/10 hidden sm:block text-zinc-300">
+          <div className="rounded-lg bg-black/80 px-2.5 py-1 backdrop-blur-sm border border-white/10 hidden sm:block">
             Target: {targetName}
           </div>
         </div>
       </div>
 
-      {/* Observation Methodology Note */}
-      <div className="rounded-xl border border-white/10 bg-zinc-900/30 p-3 text-xs text-zinc-400 flex items-center gap-2">
-        <Info className="h-4 w-4 text-zinc-400 shrink-0" />
+      {/* Detective Hint Banner */}
+      <div className="rounded-xl border border-glass-border glass p-3 text-xs text-muted-foreground flex items-center gap-2">
+        <Info className="h-4 w-4 text-aurora shrink-0" />
         <span>
-          <strong>Observatory Principle:</strong> Distant stars remain stationary over short baselines.
-          Bodies gravitationally bound within our solar system exhibit measurable parallax and orbital
-          proper motion between observational epochs.
+          <strong>Why this works:</strong> Stars are trillions of miles away and appear completely frozen.
+          Only objects orbiting inside our solar system (asteroids, comets, or outer planets) are close
+          enough to jump across the screen over days or years!
         </span>
       </div>
 
       {/* Comparison Cards: Photo 1 vs Photo 2 */}
       <div className="grid gap-3 sm:grid-cols-2">
         {/* Photo 1 Card */}
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-4 space-y-2 backdrop-blur-sm">
+        <div className="rounded-2xl border border-glass-border glass p-4 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="rounded-md bg-white/10 border border-white/10 px-2 py-0.5 font-mono text-xs font-medium text-sky-200">
-              Photo 1 Metadata
+            <span className="rounded-md bg-cyan-400/20 px-2 py-0.5 font-mono text-xs font-bold text-cyan-300">
+              📸 Photo 1 Snapshot
             </span>
-            <span className="font-mono text-xs text-zinc-400">{epochA.obsDate}</span>
+            <span className="font-mono text-xs text-muted-foreground">{epochA.obsDate}</span>
           </div>
           <div className="grid grid-cols-2 gap-2 font-mono text-xs pt-1">
-            <div className="rounded-lg bg-black/40 p-2 border border-white/5">
-              <span className="block text-[10px] text-zinc-400">Coordinates (J2000)</span>
-              <span className="font-semibold text-zinc-200">
+            <div className="rounded-lg bg-background/50 p-2">
+              <span className="block text-[10px] text-muted-foreground">Sky Coordinates</span>
+              <span className="font-semibold text-foreground">
                 RA {epochA.ra}°, Dec {epochA.dec}°
               </span>
             </div>
-            <div className="rounded-lg bg-black/40 p-2 border border-white/5">
-              <span className="block text-[10px] text-zinc-400">Infrared Channel</span>
-              <span className="font-semibold text-zinc-200 truncate block">{epochA.detector}</span>
+            <div className="rounded-lg bg-background/50 p-2">
+              <span className="block text-[10px] text-muted-foreground">Infrared Band / Instrument</span>
+              <span className="font-semibold text-foreground truncate block">{epochA.detector}</span>
             </div>
           </div>
           <div className="flex items-center justify-between pt-1 text-xs">
-            <span className="font-mono text-[11px] text-zinc-500">NASA / IPAC IRSA Archive</span>
+            <span className="font-mono text-[11px] text-muted-foreground">NASA / IPAC IRSA Archive</span>
             <a
               href={epochA.cutoutUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-mono text-[11px] text-zinc-300 hover:text-white hover:underline"
+              className="inline-flex items-center gap-1 font-mono text-[11px] text-cyan-400 hover:underline"
             >
               <Download className="h-3 w-3" />
-              <span>SPHEREx FITS</span>
+              <span>SPHEREx FITS Image</span>
             </a>
           </div>
         </div>
 
         {/* Photo 2 Card */}
-        <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-4 space-y-2 backdrop-blur-sm">
+        <div className="rounded-2xl border border-glass-border glass p-4 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="rounded-md bg-white/10 border border-white/10 px-2 py-0.5 font-mono text-xs font-medium text-amber-200">
-              Photo 2 Metadata
+            <span className="rounded-md bg-amber-400/20 px-2 py-0.5 font-mono text-xs font-bold text-amber-300">
+              📸 Photo 2 Snapshot
             </span>
-            <span className="font-mono text-xs text-zinc-400">{epochB.obsDate}</span>
+            <span className="font-mono text-xs text-muted-foreground">{epochB.obsDate}</span>
           </div>
           <div className="grid grid-cols-2 gap-2 font-mono text-xs pt-1">
-            <div className="rounded-lg bg-black/40 p-2 border border-white/5">
-              <span className="block text-[10px] text-zinc-400">Coordinates (J2000)</span>
-              <span className="font-semibold text-zinc-200">
+            <div className="rounded-lg bg-background/50 p-2">
+              <span className="block text-[10px] text-muted-foreground">Sky Coordinates</span>
+              <span className="font-semibold text-foreground">
                 RA {epochB.ra}°, Dec {epochB.dec}°
               </span>
             </div>
-            <div className="rounded-lg bg-black/40 p-2 border border-white/5">
-              <span className="block text-[10px] text-zinc-400">Infrared Channel</span>
-              <span className="font-semibold text-zinc-200 truncate block">{epochB.detector}</span>
+            <div className="rounded-lg bg-background/50 p-2">
+              <span className="block text-[10px] text-muted-foreground">Infrared Band / Instrument</span>
+              <span className="font-semibold text-foreground truncate block">{epochB.detector}</span>
             </div>
           </div>
           <div className="flex items-center justify-between pt-1 text-xs">
-            <span className="font-mono text-[11px] text-zinc-500">NASA / IPAC IRSA Archive</span>
+            <span className="font-mono text-[11px] text-muted-foreground">NASA / IPAC IRSA Archive</span>
             <a
               href={epochB.cutoutUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-mono text-[11px] text-zinc-300 hover:text-white hover:underline"
+              className="inline-flex items-center gap-1 font-mono text-[11px] text-amber-400 hover:underline"
             >
               <Download className="h-3 w-3" />
-              <span>SPHEREx FITS</span>
+              <span>SPHEREx FITS Image</span>
             </a>
           </div>
         </div>
@@ -491,79 +494,82 @@ export function BlinkComparator({
 
       {/* Citizen Science Discovery Certificate Modal */}
       <Dialog open={certModalOpen} onOpenChange={setCertModalOpen}>
-        <DialogContent className="max-w-xl border border-white/15 bg-zinc-950 text-zinc-100 backdrop-blur-xl p-6 sm:p-8 overflow-hidden relative">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-36 overflow-hidden opacity-20">
+        <DialogContent className="max-w-xl border-aurora/40 bg-black/95 text-foreground backdrop-blur-xl p-6 sm:p-8 overflow-hidden relative">
+          {/* Subtle Award Banner Backdrop */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-36 overflow-hidden opacity-30">
             <img src="/planet-x.jpg" alt="" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/80 to-zinc-950" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-black" />
           </div>
 
           <DialogHeader className="space-y-3 relative z-10">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 font-mono text-xs font-semibold text-zinc-200 border border-white/10">
-                <Trophy className="h-3.5 w-3.5 text-amber-500" />
-                <span>CITIZEN SCIENCE DISCOVERY LOG</span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-aurora/20 px-3 py-1 font-mono text-xs font-bold text-aurora border border-aurora/40">
+                <Trophy className="h-3.5 w-3.5 text-amber-300" />
+                <span>OFFICIAL CITIZEN SCIENCE LOG</span>
               </span>
-              <span className="font-mono text-xs text-zinc-400">NASA Space Apps 2026</span>
+              <span className="font-mono text-xs text-muted-foreground">NASA Space Apps 2026</span>
             </div>
-            <DialogTitle className="text-2xl sm:text-3xl font-display font-light text-white">
-              Candidate Confirmed: <span className="font-semibold text-zinc-100">{targetName}</span>
+            <DialogTitle className="text-2xl sm:text-3xl font-display font-light">
+              Candidate Confirmed: <span className="text-aurora font-semibold">{targetName}</span>
             </DialogTitle>
-            <DialogDescription className="text-sm text-zinc-400">
-              You confirmed a moving solar system body using multi-epoch comparative astronomy.
+            <DialogDescription className="text-sm text-muted-foreground">
+              You just confirmed a real moving solar system body using the classic blink-comparator
+              technique invented to discover Pluto!
             </DialogDescription>
           </DialogHeader>
 
           {/* Certificate Card Body */}
-          <div className="rounded-2xl border border-white/10 bg-black/50 p-5 space-y-4 my-2 relative z-10">
+          <div className="rounded-2xl border border-glass-border glass p-5 space-y-4 my-2">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span className="text-xs text-zinc-400 font-mono">STATUS</span>
-              <span className="font-mono text-xs font-medium text-emerald-400 flex items-center gap-1">
+              <span className="text-xs text-muted-foreground font-mono">DISCOVERY STATUS</span>
+              <span className="font-mono text-xs font-bold text-green-400 flex items-center gap-1">
                 <CheckCircle2 className="h-4 w-4" />
-                VERIFIED VIA SPHEREx DR1
+                VERIFIED & LOGGED
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-3 font-mono text-xs">
               <div>
-                <span className="text-zinc-500 block text-[11px]">Object Classification</span>
+                <span className="text-muted-foreground block text-[11px]">Object Classification</span>
                 <span className="font-semibold text-white">{targetName}</span>
               </div>
               <div>
-                <span className="text-zinc-500 block text-[11px]">Measured Movement</span>
-                <span className="font-semibold text-zinc-200">
+                <span className="text-muted-foreground block text-[11px]">Measured Movement</span>
+                <span className="font-semibold text-aurora">
                   {totalOffsetDeg.toFixed(4)}° ({motionRate || "detected"})
                 </span>
               </div>
               <div>
-                <span className="text-zinc-500 block text-[11px]">Photo 1 Timestamp</span>
-                <span className="text-zinc-300">{epochA.obsDate}</span>
+                <span className="text-muted-foreground block text-[11px]">Photo 1 Timestamp</span>
+                <span className="text-white/80">{epochA.obsDate}</span>
               </div>
               <div>
-                <span className="text-zinc-500 block text-[11px]">Photo 2 Timestamp</span>
-                <span className="text-zinc-300">{epochB.obsDate}</span>
+                <span className="text-muted-foreground block text-[11px]">Photo 2 Timestamp</span>
+                <span className="text-white/80">{epochB.obsDate}</span>
               </div>
             </div>
 
-            <div className="rounded-xl bg-zinc-900/60 p-3 text-xs leading-relaxed text-zinc-400 border border-white/5">
-              <strong>Historical Context:</strong> In 1930, Clyde Tombaugh spent thousands of hours
-              manually examining glass plates on a mechanical blink comparator to discover Pluto. You've
-              applied that exact comparative principle across NASA's next-generation SPHEREx infrared
-              space observatory data.
+            <div className="rounded-xl bg-background/60 p-3 text-xs leading-relaxed text-muted-foreground border border-white/5">
+              <strong>Astronomer's Note:</strong> In 1930, 24-year-old Clyde Tombaugh spent thousands of
+              hours examining glass photographic plates with a mechanical blink comparator until he
+              spotted a tiny dot shifting between two nights of exposures — discovering Pluto. You've
+              just performed the exact same optical comparison across NASA's next-generation SPHEREx
+              space observatory scans!
             </div>
           </div>
 
           {/* Modal Action Buttons */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 relative z-10">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
             <Button
               variant="outline"
               size="sm"
               onClick={handleCopyReport}
-              className="gap-1.5 font-mono text-xs border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10 hover:text-white"
+              className="gap-1.5 font-mono text-xs"
             >
               {copiedReport ? (
                 <>
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>Report Copied</span>
+                  <CheckCircle2 className="h-3.5 w-3.5 text-green-400" />
+                  <span>Report Copied!</span>
                 </>
               ) : (
                 <>
@@ -579,7 +585,7 @@ export function BlinkComparator({
               onClick={() => setCertModalOpen(false)}
               className="font-mono text-xs"
             >
-              Close & Continue
+              Keep Hunting Targets →
             </Button>
           </div>
         </DialogContent>

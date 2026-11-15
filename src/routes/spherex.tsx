@@ -128,39 +128,42 @@ function SpherexPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb & Live Mission Badge */}
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-zinc-400">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
             <span>NASA Astrophysics</span>
             <span>/</span>
-            <span className="text-zinc-200 font-semibold">SPHEREx Mission Portal</span>
+            <span className="text-primary font-semibold">SPHEREx Mission Portal</span>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-zinc-300">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] text-primary">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
             <span>SURVEY ACTIVE · 102 SPECTRAL CHANNELS · ALL-SKY</span>
           </div>
         </div>
 
         {/* Hero Section */}
-        <section className="mt-6 rounded-3xl border border-white/10 bg-zinc-900/40 backdrop-blur-md p-6 sm:p-10 relative overflow-hidden">
+        <section className="mt-6 rounded-3xl border border-glass-border glass p-6 sm:p-10 relative overflow-hidden">
           {/* High-Resolution 3D SPHEREx Spacecraft Atmospheric Visual */}
           <div className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-3/5 overflow-hidden">
             <img
               src="/spherex-observatory.jpg"
               alt="NASA SPHEREx Space Telescope in orbit"
-              className="h-full w-full object-cover object-center lg:object-right opacity-30 lg:opacity-45 filter contrast-110 brightness-90"
+              className="h-full w-full object-cover object-center lg:object-right opacity-35 lg:opacity-55 filter contrast-115 brightness-95"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#070712] via-[#070712]/80 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#070712] via-transparent to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300 font-mono">
-              <Atom className="h-3.5 w-3.5 text-zinc-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-aurora/30 bg-aurora/10 px-3 py-1 text-xs text-aurora font-mono">
+              <Atom className="h-3.5 w-3.5" />
               <span>Caltech / IPAC IRSA Archive Integration</span>
             </div>
-            <h1 className="mt-4 font-display text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-tight text-white">
-              SPHEREx: <span className="font-semibold text-zinc-100">An All-Sky Spectral Survey</span>
+            <h1 className="mt-4 font-display text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-tight">
+              SPHEREx: <span className="text-aurora font-semibold">An All-Sky Spectral Survey</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg leading-relaxed text-zinc-300 max-w-3xl">
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-muted-foreground max-w-3xl">
               The Spectro-Photometer for the History of the Universe, Epoch of Reionization and Ices
               Explorer (SPHEREx) is mapping 100% of the celestial sphere in 102 infrared spectral
               channels from 0.75 to 5.0 µm, probing cosmic inflation, galaxy evolution, and
